@@ -1,6 +1,3 @@
-// JavaScript File: scripts.js
-
-// Array of advertisements
 let advertisements = [
   {
     title: "Ad 1",
@@ -50,20 +47,20 @@ function renderAdvertisements(ads) {
     card.className = "card mb-4 col-md-4";
 
     const cardContent = `
-            <img class="card-img-top" src="${ad.image}" alt="${ad.title}">
-            <div class="card-body">
-                <h5 class="card-title">${ad.title}</h5>
-                <p class="card-text">${ad.description}</p>
-                <p class="card-text" onclick="toggleContact('${
-                  ad.contact
-                }')">Contact: ${isContactHidden ? "***" : ad.contact}</p>
-            </div>
-            <div class="card-footer text-center">
-                <button class="btn btn-info btn-block" onclick="showDetails('${
-                  ad.contact
-                }')">Details</button>
-            </div>
-        `;
+        <img class="card-img-top" src="${ad.image}" alt="${ad.title}">
+        <div class="card-body">
+            <h5 class="card-title">${ad.title}</h5>
+            <p class="card-text">${ad.description}</p>
+            <p class="card-text" onclick="toggleContact('${
+              ad.contact
+            }')">Contact: ${isContactHidden ? "***" : ad.contact}</p>
+        </div>
+        <div class="card-footer text-center">
+            <button class="btn btn-info btn-block" onclick="showDetails('${
+              ad.contact
+            }')">Details</button>
+        </div>
+    `;
 
     card.innerHTML = cardContent;
     advertisementsContainer.appendChild(card);
@@ -85,7 +82,7 @@ filterInput.addEventListener("input", function () {
 
 // Function to toggle contact information
 const toggleContactButton = document.getElementById("toggleContact");
-let isContactHidden = true;
+let isContactHidden; // Declare but don't initialize here
 
 function toggleContact(contact) {
   isContactHidden = !isContactHidden;
@@ -98,4 +95,8 @@ function showDetails(contact) {
 }
 
 // Call the function to render advertisements on page load
-window.onload = renderAdvertisements;
+window.onload = function () {
+  // Initialize isContactHidden here
+  isContactHidden = true;
+  renderAdvertisements(advertisements);
+};
